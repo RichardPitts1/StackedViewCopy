@@ -14,7 +14,8 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
     @IBOutlet weak var myImageView: UIImageView!
     
     let data = ["a bunch of nonsense", "a lot more nonsense", "Nonsense too", "Another TextField", "Extras"]
-    let data2 = ["Title1", "title2", "title3"]
+    
+    let data2 = ["Tidftleasd1", "title2", "title3", "Is this how I make more?"]
     
     var views = [UIView]()
     var animator:UIDynamicAnimator!
@@ -33,10 +34,11 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         animator.addBehavior(gravity)
         gravity.magnitude = 4
         
-        var offset:CGFloat = 250
+        var offset:CGFloat = 450
         
-        for i in 0 ... data.count - 1 {
-            if let view = addViewController(atOffset: offset, dataForVC: data[i] as AnyObject?) {
+        // This mediates the number of child view controllers you have, you add to the array referenced to add more...
+        for i in 0 ... data2.count - 1 {
+            if let view = addViewController(atOffset: offset, dataForVC: data2[i] as AnyObject?) {
                 views.append(view)
                 offset -= 50
               
@@ -51,14 +53,16 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let stackElementVC = sb.instantiateViewController(withIdentifier: "StackElement") as! StackElementViewController
         
+        //Well this is obviously just shadow coloring...
         if let view = stackElementVC.view {
             view.frame = frameForView
-            view.layer.cornerRadius = 16
+            view.layer.cornerRadius = 34
             //You need to consider these 4 adjustments to create a drop shadow
-            view.layer.shadowOffset = CGSize(width: 0, height: 0)
+            view.layer.shadowOffset = CGSize(width: -4, height: -3)
             view.layer.shadowColor = UIColor.black.cgColor
-            view.layer.shadowRadius = 4
+            view.layer.shadowRadius = 12
             view.layer.shadowOpacity = 1
+            //view.layer.
             
             
             if let headerStr = data as? String {
@@ -74,16 +78,18 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
             let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ViewController.handlePan(gestureRecognizer:)))
             view.addGestureRecognizer(panGestureRecognizer)
             
+            
+            
             let collision = UICollisionBehavior(items: [view])
             collision.collisionDelegate = self
             animator.addBehavior(collision)
-            
+ 
             
             
             // lower boundary
             let boundary = view.frame.origin.y + view.frame.size.height
             var boundaryStart = CGPoint(x: 0, y: boundary)
-            var boundaryEnd = CGPoint(x: self.view.bounds.size.width, y: boundary)
+            var boundaryEnd = CGPoint(x: self.view.bounds.size.width + 100, y: boundary)
             collision.addBoundary(withIdentifier: 1 as NSCopying, from: boundaryStart, to: boundaryEnd)
             
             // upper boundary
@@ -110,7 +116,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         if gestureRecognizer.state == .began {
             let dragStartPoint = gestureRecognizer.location(in: draggedView)
             
-            if dragStartPoint.y < 200 {
+            if dragStartPoint.y < 500 {
                 viewDragging = true
                 previousTouchPoint = touchPoint
             }
@@ -123,7 +129,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
             
             pin(view: draggedView)
             
-            addVelocity(toView: draggedView, fromGestureRecognizer: gestureRecognizer)
+           // addVelocity(toView: draggedView, fromGestureRecognizer: gestureRecognizer)
             
             animator.updateItem(usingCurrentState: draggedView)
             viewDragging = false
@@ -137,7 +143,8 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         if viewHasReachedPinLocation {
             if !viewPinned {
                 var snapPosition = self.view.center
-                snapPosition.y += 30
+                // The Value below adjusts how high up the folders go.  A bigger value makes it lock at a lower position.
+                snapPosition.y += 150
                 
                 snap = UISnapBehavior(item: view, snapTo: snapPosition)
                 animator.addBehavior(snap)
@@ -164,16 +171,16 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         }
     }
     
-    func addVelocity(toView view:UIView, fromGestureRecognizer panGesture:UIPanGestureRecognizer) {
+   /* func addVelocity(toView view:UIView, fromGestureRecognizer panGesture:UIPanGestureRecognizer) {
         var velocity = panGesture.velocity(in: self.view)
         velocity.x = 0
         
         if let behavior = itemBehavior(forView: view) {
             behavior.addLinearVelocity(velocity, for: view)
-        }
+        }}
         
-        
-    }
+        */
+    
     
     func itemBehavior (forView view:UIView) -> UIDynamicItemBehavior? {
         for behavior in animator.behaviors {
@@ -190,13 +197,15 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
     func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
         
         
-        if NSNumber(integerLiteral: 2).isEqual(identifier) {
+        if NSNumber(integerLiteral: 0).isEqual(identifier) {
             let view = item as! UIView
             pin(view: view)
-        }
+        }}
         
-        applyMotionEffect(toView: myImageView, magnitude: 6)
+    /*     applyMotionEffect(toView: myImageView, magnitude: 6)
     }
+    
+
     
     func applyMotionEffect (toView view: UIView, magnitude:Float) {
         let xMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
@@ -215,7 +224,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
     
         
         
-  
+  */
     
     
     
