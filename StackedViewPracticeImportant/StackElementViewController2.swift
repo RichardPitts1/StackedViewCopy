@@ -1,49 +1,49 @@
 //
-//  StackElementViewController.swift
-//  StackedViewPractice
+//  StackElementViewController2.swift
+//  StackedViewPracticeImportant
 //
-//  Created by Richard E Pitts on 2/26/17.
+//  Created by Richard E Pitts on 3/9/17.
 //  Copyright © 2017 Richard E Pitts. All rights reserved.
 //
 
 import UIKit
 
-class StackElementViewController: UIViewController {
-
+class StackElementViewController2: UIViewController {
     
-            // IS THIS REFERENCING SOMETHING FROM ANOTHER SOURCE CODE FILE??!!
+    
+    // IS THIS REFERENCING SOMETHING FROM ANOTHER SOURCE CODE FILE??!!
     @IBOutlet weak var headerLabel: UILabel!
     
     @IBOutlet weak var topLabel: UITextView!
-
-// NEW STUFF
-
-
-    var topString: String? {
+    
+    // NEW STUFF
+    
+    
+    var topString2: String? {
         didSet {
             configureView()
         }
     }
     
     func topView() {
-        topLabel.text = topString
+        topLabel.text = topString2
     }
     //END
     
-    var headerString: String? {
+    var headerString2: String? {
         didSet {
             configureView()
         }
     }
     
     func configureView() {
-        headerLabel.text = headerString
+        headerLabel.text = headerString2
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
     }
     
     

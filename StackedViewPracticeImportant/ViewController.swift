@@ -10,12 +10,18 @@ import UIKit
 
 class ViewController: UIViewController, UICollisionBehaviorDelegate {
     
+    /* ULTIMATE GOALS:
+            I NEED TO FIGURE OUT HOW TO MANIPULATE WHAT IS IN THE TEXT FIELDS AND HOW TO HAVE DIFFERENT VIEWS HAVE DIFFERENT BUTTONS, ETC.  FROM THERE I CAN START FINISHING OFF THE COMPONENTS OF THE PROJECT AND THEN ULTIMATELY START WORKING ON THE WORKOUTS PORTION OF THE APPLICATION.  THAT PART TAKES THE MOST THINKING EVEN THOUGH ALL I REALLY HAVE TO DO IS GROUP THE SETS FOR A GIVEN MUSCLE IN UNITS OF 4 SETS/EXERCISE THEN HAVE A RANDOM GENERATOR TO FIGHT NATURE WITH HER OWN FORCES 
+ 
+                */
+    
     
     @IBOutlet weak var myImageView: UIImageView!
     
     let data = ["a bunch of nonsense", "a lot more nonsense", "Nonsense too", "Another TextField", "Extras"]
     
-    let data2 = ["Tidftleasd1", "title2", "title3", "Is this how I make more?"]
+    let data2 = ["Tidftleasd1"]
+    
     
     var views = [UIView]()
     var animator:UIDynamicAnimator!
@@ -32,21 +38,23 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         gravity = UIGravityBehavior()
         
         animator.addBehavior(gravity)
-        gravity.magnitude = 4
+        gravity.magnitude = 1
         
-        var offset:CGFloat = 450
+        // This mediates the height of the files, a value below 200 puts them far too low on the screen, 400 too high...
+        var offset:CGFloat = 250
         
         // This mediates the number of child view controllers you have, you add to the array referenced to add more...
+                    // Offset is the space between the files.  A value of 50 is pretty standard.  75 makes a lil too much space
         for i in 0 ... data2.count - 1 {
             if let view = addViewController(atOffset: offset, dataForVC: data2[i] as AnyObject?) {
                 views.append(view)
-                offset -= 50
+                offset -= 66
               
             }
         }
         
     }
-    
+    // THE SOLUTION HAS TO LIE WITHIN HERE, THIS IS THE ONLY PLACE STACKELEMENTVIEWCONTROLLER IS REFERENCED...
     func addViewController (atOffset offset:CGFloat, dataForVC data:AnyObject?) -> UIView? {
         let frameForView = self.view.bounds.offsetBy(dx: 0, dy: self.view.bounds.size.height - offset)
         
@@ -58,11 +66,11 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
             view.frame = frameForView
             view.layer.cornerRadius = 34
             //You need to consider these 4 adjustments to create a drop shadow
-            view.layer.shadowOffset = CGSize(width: -4, height: -3)
+            view.layer.shadowOffset = CGSize(width: -9, height: -3)
             view.layer.shadowColor = UIColor.black.cgColor
-            view.layer.shadowRadius = 12
+            view.layer.shadowRadius = 22
             view.layer.shadowOpacity = 1
-            //view.layer.
+        
             
             
             if let headerStr = data as? String {
@@ -129,7 +137,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
             
             pin(view: draggedView)
             
-           // addVelocity(toView: draggedView, fromGestureRecognizer: gestureRecognizer)
+           addVelocity(toView: draggedView, fromGestureRecognizer: gestureRecognizer)
             
             animator.updateItem(usingCurrentState: draggedView)
             viewDragging = false
@@ -139,7 +147,9 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
     }
     
     func pin (view: UIView) {
-        let viewHasReachedPinLocation = view.frame.origin.y < 100
+        
+        //This value below reflects how much the view will shoot up to the pin location.  100 is standard.
+        let viewHasReachedPinLocation = view.frame.origin.y < 200
         if viewHasReachedPinLocation {
             if !viewPinned {
                 var snapPosition = self.view.center
@@ -163,6 +173,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         
     }
     
+    // Doesnt Mean Shit...
     func setVisibility(view:UIView, alpha:CGFloat) {
         for aView in views {
             if aView != view {
@@ -171,15 +182,20 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         }
     }
     
-   /* func addVelocity(toView view:UIView, fromGestureRecognizer panGesture:UIPanGestureRecognizer) {
+    //This adds velocity to the views when they are tossed up
+    func addVelocity(toView view:UIView, fromGestureRecognizer panGesture:UIPanGestureRecognizer) {
         var velocity = panGesture.velocity(in: self.view)
+        
+        //IMPORTANT :  Negative = The view floats to the left...Positive it floats to the right.  Default is 0
         velocity.x = 0
         
         if let behavior = itemBehavior(forView: view) {
             behavior.addLinearVelocity(velocity, for: view)
+            
+            //Maybe you could create a if statement that corrects any velocity left or right?
         }}
         
-        */
+    
     
     
     func itemBehavior (forView view:UIView) -> UIDynamicItemBehavior? {

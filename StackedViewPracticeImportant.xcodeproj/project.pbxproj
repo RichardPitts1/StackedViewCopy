@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BA5988D1E721F7100A7BA4A /* StackElementViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5988C1E721F7100A7BA4A /* StackElementViewController2.swift */; };
 		1BB1AED21E64909700F08EB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB1AED11E64909700F08EB8 /* AppDelegate.swift */; };
 		1BB1AED41E64909700F08EB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB1AED31E64909700F08EB8 /* ViewController.swift */; };
 		1BB1AED71E64909700F08EB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB1AED51E64909700F08EB8 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BA5988C1E721F7100A7BA4A /* StackElementViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackElementViewController2.swift; sourceTree = "<group>"; };
 		1BB1AECE1E64909700F08EB8 /* StackedViewPracticeImportant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackedViewPracticeImportant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB1AED11E64909700F08EB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB1AED31E64909700F08EB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				1BB1AEDA1E64909700F08EB8 /* LaunchScreen.storyboard */,
 				1BB1AEDD1E64909700F08EB8 /* Info.plist */,
 				1BB1AEE31E6490CD00F08EB8 /* StackElementViewController.swift */,
+				1BA5988C1E721F7100A7BA4A /* StackElementViewController2.swift */,
 			);
 			path = StackedViewPracticeImportant;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				1BB1AED41E64909700F08EB8 /* ViewController.swift in Sources */,
 				1BB1AED21E64909700F08EB8 /* AppDelegate.swift in Sources */,
 				1BB1AEE41E6490CD00F08EB8 /* StackElementViewController.swift in Sources */,
+				1BA5988D1E721F7100A7BA4A /* StackElementViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +310,7 @@
 				1BB1AEE21E64909700F08EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
